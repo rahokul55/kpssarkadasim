@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#E91E63">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KPSS Arkadaşı">
+<title>🌸 KPSS Çalışma Arkadaşım</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<style>
+/* ============ PASTEL PEMBE-MOR TEMA ============ */
+:root {
+  --pembe-koyu: #E91E63;
+  --pembe-orta: #F06292;
+  --pembe-acik: #FCE4EC;
+  --pembe-cok-acik: #FFF0F5;
+  --mor-koyu: #9C27B0;
+  --mor-orta: #BA68C8;
+  --mor-acik: #F3E5F5;
+  --lila: #E1BEE7;
+  --krem: #FFF9C4;
+  --menta: #C8E6C9;
+  --yesil: #4CAF50;
+  --sari: #FFC107;
+  --gok: #BBDEFB;
+  --gri-koyu: #424242;
+  --gri-orta: #757575;
+  --beyaz: #FFFFFF;
+  --gradient-ana: linear-gradient(135deg, #FCE4EC 0%, #F3E5F5 50%, #E1BEE7 100%);
+  --gradient-gokyuzu: linear-gradient(180deg, #FFE0EC 0%, #FFD6EC 30%, #E0C3F5 100%);
+  --golge-tatli: 0 4px 20px rgba(233, 30, 99, 0.15);
+  --golge-yumusak: 0 2px 10px rgba(156, 39, 176, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: -apple-system, 'Quicksand', 'Nunito', system-ui, sans-serif;
+  background: var(--gradient-ana);
+  color: var(--gri-koyu);
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body { height: 100%; overscroll-behavior: none; }
+
+/* ============ GİRİŞ EKRANI ============ */
+.giris-ekrani {
+  position: fixed;
+  inset: 0;
+  background: var(--gradient-gokyuzu);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  z-index: 1000;
+  animation: girisGel 0.6s ease-out;
+}
+
+@keyframes girisGel {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.giris-logo {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: yuzmek 3s ease-in-out infinite;
+}
+
+@keyframes yuzmek {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+.giris-baslik {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--pembe-koyu);
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.giris-alt {
+  font-size: 14px;
+  color: var(--mor-koyu);
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.giris-form {
+  background: var(--beyaz);
+  padding: 30px 25px;
+  border-radius: 30px;
+  box-shadow: var(--golge-tatli);
+  width: 100%;
+  max-width: 340px;
+}
+
+.giris-label {
+  font-size: 14px;
+  color: var(--gri-orta);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.giris-input {
+  width: 100%;
+  padding: 15px 18px;
+  border: 2px solid var(--pembe-acik);
+  border-radius: 18px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--pembe-cok-acik);
+  color: var(--gri-koyu);
+  transition: all 0.2s;
+  outline: none;
+  font-weight: 500;
+}
+
+.giris-input:focus {
+  border-color: var(--pembe-koyu);
+  background: var(--beyaz);
+  box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+}
+
+.giris-buton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--pembe-koyu), var(--mor-koyu));
+  color: var(--beyaz);
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.giris-buton:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+.giris-bilgi {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--gri-orta);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ============ ANA UYGULAMA ============ */
+.uygulama {
+  display: none;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+.uygulama.aktif { display: block; }
+
+/* ============ ÜST BANTLAR (KPSS GERİ SAYIM) ============ */
+.ust-bant {
+  background: linear-gradient(90deg, var(--pembe-koyu), var(--mor-koyu));
+  color: var(--beyaz);
+  padding: 10px 15px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ust-bant-sayac {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ust-bant-rakam {
+  font-size: 18px;
+  font-weight: 800;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin: 0 3px;
+}
+
+/* ============ HOŞGELDİN BANTI ============ */
+.hosgeldin {
+  background: var(--beyaz);
+  margin: 15px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  box-shadow: var(--golge-yumusak);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hosgeldin-sol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.hosgeldin-merhaba { font-size: 13px; color: var(--gri-orta); font-weight: 500; }
+.hosgeldin-isim { font-size: 20px; font-weight: 700; color: var(--pembe-koyu); }
+
+.menu-btn {
+  background: var(--pembe-acik);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--pembe-koyu);
+}
+.menu-btn:active { transform: scale(0.95); }
+
+/* ============ TABS (ALT NAV) ============ */
+.alt-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--beyaz);
+  display: flex;
+  padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  z-index: 100;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--gri-orta);
+  font-size: 10px;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.tab-ikon { font-size: 22px; }
+.tab.aktif { color: var(--pembe-koyu); }
+.tab.aktif .tab-ikon { transform: scale(1.15); }
+
+/* ============ SAYFALAR ============ */
+.sayfa { display: none; padding: 0 15px; }
+.sayfa.aktif { display: block; animation: sayfaGel 0.3s ease-out; }
+
+@keyframes sayfaGel {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ ADA GÖRÜNÜMÜ ============ */
+.ada-kart {
+  background: var(--gradient-gokyuzu);
+  border-radius: 24px;
+  padding: 20px 15px;
+  margin-bottom: 15px;
+  box-shadow: var(--golge-tatli);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ada-baslik {
+  font-size: 13px;
+  color: var(--mor-koyu);
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ada-seviye {
+  font-size: 18px;
+  color: var(--pembe-koyu);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.ada-gorsel {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  background: linear-gradient(180deg, 
+    #FFD6EC 0%, 
+    #FFE5F0 30%, 
+    #E3F2FD 60%, 
+    #4A90A4 80%, 
+    #2D5F6F 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Güneş */
+.ada-gunes {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #FFE082, #FFCA28);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255, 193, 7, 0.6);
+  animation: gunesParlar 4s ease-in-out infinite;
+}
+
+@keyframes gunesParlar {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 193, 7, 0.6); }
+  50% { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 193, 7, 0.8); }
+}
+
+/* Bulutlar */
+.bulut {
+  position: absolute;
+  background: var(--beyaz);
+  border-radius: 30px;
+  opacity: 0.9;
+  animation: bulutGec 20s linear infinite;
+}
+.bulut::before, .bulut::after {
+  content: '';
+  position: absolute;
+  background: var(--beyaz);
+  border-radius: 50%;
+}
+.bulut1 { top: 20px; left: 30px; width: 50px; height: 18px; animation-duration: 25s; }
+.bulut1::before { width: 22px; height: 22px; top: -10px; left: 8px; }
+.bulut1::after { width: 28px; height: 28px; top: -14px; left: 20px; }
+
+.bulut2 { top: 45px; left: 60%; width: 40px; height: 14px; animation-duration: 30s; animation-delay: -15s; }
+.bulut2::before { width: 18px; height: 18px; top: -8px; left: 5px; }
+.bulut2::after { width: 22px; height: 22px; top: -10px; left: 15px; }
+
+@keyframes bulutGec {
+  from { transform: translateX(-100px); }
+  to { transform: translateX(calc(100vw + 100px)); }
+}
+
+/* Ada - kara parçası */
+.ada-kara {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 50%;
+  background: linear-gradient(180deg, #8BC34A 0%, #7CB342 30%, #689F38 60%, #558B2F 100%);
+  border-radius: 50% 50% 10% 10% / 60% 60% 5% 5%;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+}
+
+/* Plaj */
+.ada-plaj {
+  position: absolute;
+  bottom: 45%;
+  left: 8%;
+  right: 8%;
+  height: 8px;
+  background: linear-gradient(180deg, #FFF3B0 0%, #FFE082 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  z-index: 1;
+}
+
+/* Ada üstündeki elemanlar container */
+.ada-yapi-alan {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  z-index: 2;
+}
+
+/* Bitki/Ağaç/Yapı öğeleri */
+.ada-oge {
+  position: absolute;
+  bottom: 35%;
+  animation: ogeGel 0.6s ease-out;
+  transform-origin: bottom center;
+}
+
+@keyframes ogeGel {
+  0% { transform: scale(0) translateY(20px); opacity: 0; }
+  60% { transform: scale(1.1) translateY(-5px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.ada-oge-emoji {
+  font-size: 30px;
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+/* Dalga animasyonu */
+.ada-dalga {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  right: -10%;
+  height: 18%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 20px,
+    rgba(255,255,255,0.3) 20px,
+    rgba(255,255,255,0.3) 25px
+  );
+  animation: dalgaKay 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes dalgaKay {
+  from { transform: translateX(0); }
+  to { transform: translateX(25px); }
+}
+
+/* Adadaki tüm elemanların pozisyonları */
+.pos-1 { left: 15%; }
+.pos-2 { left: 28%; bottom: 40%; }
+.pos-3 { left: 45%; }
+.pos-4 { left: 62%; bottom: 42%; }
+.pos-5 { left: 78%; }
+.pos-6 { left: 8%; bottom: 38%; }
+.pos-7 { left: 38%; bottom: 45%; }
+.pos-8 { left: 55%; bottom: 38%; }
+.pos-9 { left: 70%; bottom: 42%; }
+.pos-10 { left: 88%; bottom: 38%; }
+
+.ada-istatistik {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ada-ist {
+  text-align: center;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 12px;
+  flex: 1;
+  min-width: 80px;
+  backdrop-filter: blur(10px);
+}
+
+.ada-ist-rakam {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--pembe-koyu);
+}
+.ada-ist-etiket {
+  font-size: 10px;
+  color: var(--mor-koyu);
+  font-weight: 600;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* ============ AKTİF ETÜT / POMODORO ============ */
+.aktif-etut-kart {
+  background: var(--beyaz);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: var(--golge-tatli);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.aktif-etut-kart.caliyor {
+  background: linear-gradient(135deg, var(--pembe-acik), var(--mor-acik));
+  animation: nabzat 1.5s ease-in-out infinite;
+}
+
+@keyframes nabzat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+}
+
+.aktif-etut-baslik {
+  font-size: 12px;
+  color: var(--mor-koyu);
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.aktif-etut-ad {
+  font-size: 22px;
+  color: var(--pembe-koyu);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.aktif-etut-detay {
+  font-size: 13px;
+  color: var(--gri-orta);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.cember-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 15px;
+}
+
+.cember-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.cember-bg {
+  fill: none;
+  stroke: var(--pembe-acik);
+  stroke-width: 12;
+}
+
+.cember-dolu {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.cember-ic {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cember-sayi {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--pembe-koyu);
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cember-etiket {
+  font-size: 11px;
+  color: var(--mor-koyu);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-top: -4px;
+}
+
+.etut-butonlar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.etut-buton {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.2px;
+}
+
+.etut-buton:active { transform: scale(0.96); }
+
+.etut-buton.baslat {
+  background: linear-gradient(135deg, var(--yesil), #388E3C);
+  color: var(--beyaz);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.etut-buton.bitir {
+  background: linear-gradient(135deg, var(--pembe-koyu), var(--mor-koyu));
+  color: var(--beyaz);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+}
+
+.etut-buton.durdur {
+  background: var(--sari);
+  color: var(--gri-koyu);
+}
+
+.etut-buton.atla {
+  background: var(--pembe-acik);
+  color: var(--pembe-koyu);
+}
+
+/* ============ PROGRAM LİSTESİ ============ */
+.program-baslik {
+  font-size: 13px;
+  color: var(--mor-koyu);
+  font-weight: 700;
+  margin: 20px 15px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blok-grubu {
+  margin-bottom: 15px;
+}
+
+.blok-baslik {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mor-koyu);
+  background: linear-gradient(90deg, var(--mor-acik), var(--pembe-acik));
+  border-radius: 14px;
+  margin: 0 0 8px;
+  display: inline-block;
+}
+
+.adim {
+  background: var(--beyaz);
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--golge-yumusak);
+  border-left: 4px solid transparent;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.adim.simdiki {
+  border-left-color: var(--pembe-koyu);
+  background: linear-gradient(90deg, var(--pembe-cok-acik), var(--beyaz));
+  animation: simdikiParla 2s ease-in-out infinite;
+}
+
+@keyframes simdikiParla {
+  0%, 100% { box-shadow: var(--golge-yumusak); }
+  50% { box-shadow: 0 4px 20px rgba(233, 30, 99, 0.25); }
+}
+
+.adim.yapildi {
+  opacity: 0.55;
+  border-left-color: var(--yesil);
+}
+
+.adim.yapildi .adim-ad,
+.adim.yapildi .adim-saat {
+  text-decoration: line-through;
+}
+
+.adim.kacti {
+  opacity: 0.4;
+  border-left-color: var(--gri-orta);
+}
+
+.adim-ikon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.adim-ikon.etut { background: var(--pembe-acik); }
+.adim-ikon.mola { background: var(--menta); }
+.adim-ikon.yemek { background: var(--krem); }
+.adim-ikon.dinlen { background: var(--lila); }
+.adim-ikon.uyku { background: var(--gok); }
+
+.adim-icerik { flex: 1; min-width: 0; }
+
+.adim-saat {
+  font-size: 11px;
+  color: var(--gri-orta);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.adim-ad {
+  font-size: 15px;
+  color: var(--gri-koyu);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.adim-detay {
+  font-size: 12px;
+  color: var(--gri-orta);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.adim-durum {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.adim-durum.yapildi { background: var(--yesil); color: var(--beyaz); }
+.adim-durum.simdiki { background: var(--pembe-koyu); color: var(--beyaz); animation: donuyor 2s linear infinite; }
+.adim-durum.bekliyor { background: var(--pembe-acik); color: var(--pembe-koyu); }
+
+@keyframes donuyor {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============ İSTATİSTİK SAYFASI ============ */
+.istat-ozet {
+  background: linear-gradient(135deg, var(--pembe-koyu), var(--mor-koyu));
+  color: var(--beyaz);
+  padding: 25px 20px;
+  border-radius: 24px;
+  margin-bottom: 15px;
+  box-shadow: var(--golge-tatli);
+  text-align: center;
+}
+
+.istat-ozet-etiket {
+  font-size: 12px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+}
+
+.istat-ozet-rakam {
+  font-size: 48px;
+  font-weight: 800;
+  margin: 8px 0;
+  letter-spacing: -2px;
+}
+
+.istat-ozet-alt {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.istat-kart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.istat-kart {
+  background: var(--beyaz);
+  padding: 16px 14px;
+  border-radius: 18px;
+  box-shadow: var(--golge-yumusak);
+  text-align: center;
+}
+
+.istat-kart-ikon { font-size: 24px; margin-bottom: 5px; }
+.istat-kart-rakam {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pembe-koyu);
+  letter-spacing: -0.5px;
+}
+.istat-kart-etiket {
+  font-size: 11px;
+  color: var(--gri-orta);
+  font-weight: 600;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.gecmis-liste {
+  background: var(--beyaz);
+  border-radius: 20px;
+  box-shadow: var(--golge-yumusak);
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.gecmis-ust {
+  padding: 16px 18px;
+  background: var(--pembe-cok-acik);
+  border-bottom: 1px solid var(--pembe-acik);
+  font-weight: 700;
+  color: var(--pembe-koyu);
+  font-size: 14px;
+}
+
+.gecmis-item {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--pembe-cok-acik);
+}
+
+.gecmis-item:last-child { border-bottom: none; }
+
+.gecmis-sol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gecmis-tarih {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gri-koyu);
+}
+.gecmis-detay {
+  font-size: 11px;
+  color: var(--gri-orta);
+  font-weight: 500;
+}
+
+.gecmis-sag {
+  text-align: right;
+}
+
+.gecmis-etut-sayi {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--pembe-koyu);
+}
+.gecmis-sure {
+  font-size: 11px;
+  color: var(--gri-orta);
+  font-weight: 600;
+}
+
+.bos-liste {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--gri-orta);
+}
+
+.bos-liste-ikon { font-size: 50px; margin-bottom: 10px; opacity: 0.5; }
+.bos-liste-yazi { font-size: 14px; font-weight: 500; }
+
+/* ============ MODAL (BİTTİ / ZAMAN GELDİ) ============ */
+.modal-arka {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-arka.aktif {
+  display: flex;
+  animation: modalGel 0.3s ease-out;
+}
+
+@keyframes modalGel {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--beyaz);
+  border-radius: 28px;
+  padding: 30px 25px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: modalCik 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+@keyframes modalCik {
+  from { transform: scale(0.5) translateY(50px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-ikon {
+  font-size: 60px;
+  margin-bottom: 10px;
+  animation: modalIkonZiple 0.6s ease-out 0.2s both;
+}
+
+@keyframes modalIkonZiple {
+  0% { transform: scale(0) rotate(-180deg); }
+  50% { transform: scale(1.2) rotate(20deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.modal-baslik {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pembe-koyu);
+  margin-bottom: 10px;
+}
+
+.modal-mesaj {
+  font-size: 14px;
+  color: var(--gri-orta);
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.modal-buton {
+  padding: 14px 40px;
+  background: linear-gradient(135deg, var(--pembe-koyu), var(--mor-koyu));
+  color: var(--beyaz);
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.modal-buton.ikincil {
+  background: var(--pembe-acik);
+  color: var(--pembe-koyu);
+  margin-top: 10px;
+  box-shadow: none;
+}
+
+/* ============ AYARLAR ============ */
+.ayar-grup {
+  background: var(--beyaz);
+  border-radius: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--golge-yumusak);
+  overflow: hidden;
+}
+
+.ayar-baslik {
+  padding: 14px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mor-koyu);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  background: var(--mor-acik);
+}
+
+.ayar-item {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--pembe-cok-acik);
+  font-size: 14px;
+}
+
+.ayar-item:last-child { border-bottom: none; }
+
+.ayar-aciklama {
+  font-size: 11px;
+  color: var(--gri-orta);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--pembe-acik);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.toggle.aktif { background: var(--pembe-koyu); }
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: var(--beyaz);
+  border-radius: 50%;
+  transition: left 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle.aktif::after { left: 22px; }
+
+.ayar-buton {
+  padding: 10px 14px;
+  background: var(--pembe-acik);
+  color: var(--pembe-koyu);
+  border: none;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ayar-buton.tehlike {
+  background: #FFEBEE;
+  color: #D32F2F;
+}
+
+/* ============ TOAST / BİLDİRİM ============ */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gri-koyu);
+  color: var(--beyaz);
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.toast.goster {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* ============ KONFETTI EFEKTİ ============ */
+.konfetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1500;
+  overflow: hidden;
+}
+
+.konfetti-parca {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  animation: konfettiDus 3s ease-out forwards;
+}
+
+@keyframes konfettiDus {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ============ MOTIVASYON KART ============ */
+.motivasyon {
+  background: linear-gradient(135deg, var(--krem), #FFF176);
+  padding: 15px 18px;
+  border-radius: 18px;
+  margin-bottom: 15px;
+  text-align: center;
+  box-shadow: var(--golge-yumusak);
+  border: 2px dashed var(--sari);
+}
+
+.motivasyon-yazi {
+  font-size: 13px;
+  color: #F57F17;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ============ SCROLL BAR ============ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--pembe-acik); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================== -->
+<!-- GİRİŞ EKRANI -->
+<!-- ============================================== -->
+<div class="giris-ekrani" id="girisEkrani">
+  <div class="giris-logo">🌸</div>
+  <div class="giris-baslik">KPSS Çalışma<br>Arkadaşım</div>
+  <div class="giris-alt">✨ Başarıya giden yolda her adım değerli ✨</div>
+  
+  <div class="giris-form">
+    <div class="giris-label">Seni nasıl çağırayım?</div>
+    <input type="text" class="giris-input" id="isimInput" placeholder="İsmin..." maxlength="20" autocomplete="off">
+    <button class="giris-buton" onclick="girisYap()">
+      Haydi Başlayalım 🌷
+    </button>
+    <div class="giris-bilgi">
+      💾 Verilerin telefonunda saklanır<br>
+      Aynı ismi yazınca tüm verilerin geri gelir
+    </div>
+  </div>
+</div>
+
+<!-- ============================================== -->
+<!-- ANA UYGULAMA -->
+<!-- ============================================== -->
+<div class="uygulama" id="uygulama">
+  
+  <!-- ÜST KPSS GERİ SAYIM -->
+  <div class="ust-bant">
+    <div class="ust-bant-sayac" id="geriSayim">
+      🎯 KPSS'ye <span class="ust-bant-rakam" id="kalanGun">--</span> gün kaldı
+    </div>
+  </div>
+  
+  <!-- HOŞGELDİN -->
+  <div class="hosgeldin">
+    <div class="hosgeldin-sol">
+      <div class="hosgeldin-merhaba">Merhaba</div>
+      <div class="hosgeldin-isim" id="isimGoster">--</div>
+    </div>
+    <button class="menu-btn" onclick="sayfaGec('ayarlar')">⚙️</button>
+  </div>
+  
+  <!-- ============= ANA SAYFA ============= -->
+  <div class="sayfa aktif" id="sayfaAna">
+    
+    <!-- ADA GÖRÜNÜMÜ -->
+    <div class="ada-kart">
+      <div class="ada-baslik">🏝️ Senin Adam</div>
+      <div class="ada-seviye" id="adaSeviye">Yeni Başlangıç</div>
+      
+      <div class="ada-gorsel" id="adaGorsel">
+        <div class="ada-gunes"></div>
+        <div class="bulut bulut1"></div>
+        <div class="bulut bulut2"></div>
+        <div class="ada-kara"></div>
+        <div class="ada-plaj"></div>
+        <div class="ada-yapi-alan" id="adaYapi"></div>
+        <div class="ada-dalga"></div>
+      </div>
+      
+      <div class="ada-istatistik">
+        <div class="ada-ist">
+          <div class="ada-ist-rakam" id="adaToplamEtut">0</div>
+          <div class="ada-ist-etiket">Toplam Etüt</div>
+        </div>
+        <div class="ada-ist">
+          <div class="ada-ist-rakam" id="adaGun">0</div>
+          <div class="ada-ist-etiket">Gün</div>
+        </div>
+        <div class="ada-ist">
+          <div class="ada-ist-rakam" id="adaSaat">0</div>
+          <div class="ada-ist-etiket">Saat</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- AKTİF ETÜT (SIRADAKİ) -->
+    <div class="aktif-etut-kart" id="aktifEtutKart">
+      <div class="aktif-etut-baslik" id="aktifEtiket">⏱️ Sıradaki</div>
+      <div class="aktif-etut-ad" id="aktifAd">--</div>
+      <div class="aktif-etut-detay" id="aktifDetay">--</div>
+      
+      <div class="cember-container">
+        <svg class="cember-svg" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#E91E63"/>
+              <stop offset="100%" style="stop-color:#9C27B0"/>
+            </linearGradient>
+          </defs>
+          <circle class="cember-bg" cx="100" cy="100" r="90"/>
+          <circle class="cember-dolu" cx="100" cy="100" r="90" 
+            stroke-dasharray="565.48" stroke-dashoffset="565.48" id="cemberDolu"/>
+        </svg>
+        <div class="cember-ic">
+          <div class="cember-sayi" id="cemberSayi">--:--</div>
+          <div class="cember-etiket" id="cemberEtiket">Bekliyor</div>
+        </div>
+      </div>
+      
+      <div class="etut-butonlar" id="etutButonlar">
+        <button class="etut-buton baslat" onclick="etutBaslat()">
+          ▶️ Başlat
+        </button>
+        <button class="etut-buton atla" onclick="etutAtla()">
+          ⏭️ Atla
+        </button>
+      </div>
+    </div>
+    
+    <!-- MOTIVASYON -->
+    <div class="motivasyon">
+      <div class="motivasyon-yazi" id="motivasyonYazi">
+        💪 Her tamamladığın etüt adanı daha da güzelleştiriyor!
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- ============= PROGRAM SAYFASI ============= -->
+  <div class="sayfa" id="sayfaProgram">
+    <div class="program-baslik">📅 Bugünkü Program</div>
+    <div id="programListesi"></div>
+  </div>
+  
+  <!-- ============= İSTATİSTİK SAYFASI ============= -->
+  <div class="sayfa" id="sayfaIstat">
+    <div class="program-baslik">📊 İstatistiklerim</div>
+    
+    <div class="istat-ozet">
+      <div class="istat-ozet-etiket">Bugünkü Çalışma</div>
+      <div class="istat-ozet-rakam" id="bugunSaat">0sa</div>
+      <div class="istat-ozet-alt" id="bugunEtutSayisi">0 etüt tamamlandı</div>
+    </div>
+    
+    <div class="istat-kart-grid">
+      <div class="istat-kart">
+        <div class="istat-kart-ikon">🔥</div>
+        <div class="istat-kart-rakam" id="stTopEtut">0</div>
+        <div class="istat-kart-etiket">Toplam Etüt</div>
+      </div>
+      <div class="istat-kart">
+        <div class="istat-kart-ikon">⏱️</div>
+        <div class="istat-kart-rakam" id="stTopSaat">0</div>
+        <div class="istat-kart-etiket">Toplam Saat</div>
+      </div>
+      <div class="istat-kart">
+        <div class="istat-kart-ikon">📆</div>
+        <div class="istat-kart-rakam" id="stTopGun">0</div>
+        <div class="istat-kart-etiket">Çalışılan Gün</div>
+      </div>
+      <div class="istat-kart">
+        <div class="istat-kart-ikon">⭐</div>
+        <div class="istat-kart-rakam" id="stOrtEtut">0</div>
+        <div class="istat-kart-etiket">Günlük Ort.</div>
+      </div>
+    </div>
+    
+    <div class="gecmis-liste">
+      <div class="gecmis-ust">📋 Son Günler</div>
+      <div id="gecmisListe"></div>
+    </div>
+  </div>
+  
+  <!-- ============= AYARLAR SAYFASI ============= -->
+  <div class="sayfa" id="sayfaAyarlar">
+    <div class="program-baslik">⚙️ Ayarlar</div>
+    
+    <div class="ayar-grup">
+      <div class="ayar-baslik">🔔 Bildirimler</div>
+      <div class="ayar-item">
+        <div>
+          <div>Ses Çalsın</div>
+          <div class="ayar-aciklama">Etüt bitince alarm</div>
+        </div>
+        <div class="toggle aktif" id="tSes" onclick="toggleBas('tSes', 'sesAcik')"></div>
+      </div>
+      <div class="ayar-item">
+        <div>
+          <div>Titreşim</div>
+          <div class="ayar-aciklama">Etüt bitince titreşir</div>
+        </div>
+        <div class="toggle aktif" id="tTit" onclick="toggleBas('tTit', 'titresimAcik')"></div>
+      </div>
+      <div class="ayar-item">
+        <div>
+          <div>Konfeti</div>
+          <div class="ayar-aciklama">Etüt biterken kutlama</div>
+        </div>
+        <div class="toggle aktif" id="tKon" onclick="toggleBas('tKon', 'konfettiAcik')"></div>
+      </div>
+    </div>
+    
+    <div class="ayar-grup">
+      <div class="ayar-baslik">🎯 KPSS Tarihi</div>
+      <div class="ayar-item">
+        <div>
+          <div>Sınav Tarihi</div>
+          <div class="ayar-aciklama">Geri sayım için</div>
+        </div>
+        <input type="date" id="kpssTarihi" onchange="kpssTarihKaydet()" style="padding:6px 10px; border:1px solid var(--pembe-acik); border-radius:10px; font-family:inherit;">
+      </div>
+    </div>
+    
+    <div class="ayar-grup">
+      <div class="ayar-baslik">👤 Kullanıcı</div>
+      <div class="ayar-item">
+        <div>
+          <div>Aktif Kullanıcı</div>
+          <div class="ayar-aciklama" id="aktifKullanici">--</div>
+        </div>
+      </div>
+      <div class="ayar-item">
+        <div>
+          <div>Çıkış Yap</div>
+          <div class="ayar-aciklama">Başka isimle giriş için</div>
+        </div>
+        <button class="ayar-buton" onclick="cikisYap()">Çıkış</button>
+      </div>
+      <div class="ayar-item">
+        <div>
+          <div>Bugünü Sıfırla</div>
+          <div class="ayar-aciklama">Yaptıklarım silinsin</div>
+        </div>
+        <button class="ayar-buton tehlike" onclick="bugunSifirla()">Sıfırla</button>
+      </div>
+    </div>
+    
+    <div class="ayar-grup">
+      <div class="ayar-baslik">ℹ️ Hakkında</div>
+      <div class="ayar-item" style="flex-direction:column; align-items:flex-start;">
+        <div>KPSS Çalışma Arkadaşım v1.0</div>
+        <div class="ayar-aciklama" style="margin-top:5px;">💖 Kadının başarısı için yapıldı</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================== -->
+<!-- ALT NAVIGATION -->
+<!-- ============================================== -->
+<nav class="alt-nav" id="altNav" style="display:none">
+  <button class="tab aktif" onclick="sayfaGec('ana')">
+    <div class="tab-ikon">🏝️</div>
+    <div>Adam</div>
+  </button>
+  <button class="tab" onclick="sayfaGec('program')">
+    <div class="tab-ikon">📅</div>
+    <div>Program</div>
+  </button>
+  <button class="tab" onclick="sayfaGec('istat')">
+    <div class="tab-ikon">📊</div>
+    <div>İstatistik</div>
+  </button>
+  <button class="tab" onclick="sayfaGec('ayarlar')">
+    <div class="tab-ikon">⚙️</div>
+    <div>Ayarlar</div>
+  </button>
+</nav>
+
+<!-- ============================================== -->
+<!-- MODAL -->
+<!-- ============================================== -->
+<div class="modal-arka" id="modalArka">
+  <div class="modal">
+    <div class="modal-ikon" id="modalIkon">🌸</div>
+    <div class="modal-baslik" id="modalBaslik">--</div>
+    <div class="modal-mesaj" id="modalMesaj">--</div>
+    <button class="modal-buton" onclick="modalKapat()" id="modalButon">Tamam</button>
+    <button class="modal-buton ikincil" id="modalIkincilBtn" onclick="modalIkincilAksiyon()" style="display:none">--</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">--</div>
+
+<!-- Konfeti -->
+<div class="konfetti" id="konfetti"></div>
+
+<!-- Alarm audio (bip ses) -->
+<audio id="alarmSesi" preload="auto">
+  <source src="data:audio/wav;base64,UklGRv7jAgBXQVZFZm10IBAAAAABAAIAQB8AAAB9AAAEABAAZGF0YdDjAgAAAP7/AgD9//////8AAP//AAD///7///8BAAAA/v///wIAAAD+/wAA//8AAAIA//8AAAAAAAD///////8AAAAAAAAAAAEAAP////8BAP3/AAD///////8BAAAAAgD//wEA//8AAAEAAAD//wAA//8AAAAAAAAAAAAA//8AAP//AAAAAAEA//8AAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" type="audio/wav">
+</audio>
+
+<script src="app.js"></script>
+</body>
+</html>
